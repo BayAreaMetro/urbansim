@@ -151,3 +151,14 @@ class Account(object):
             return pd.DataFrame(columns=COLS + col_names)
 
         return pd.DataFrame(rows, columns=COLS + col_names)
+
+    def __str__(self):
+        """
+        Prints an account object
+        """
+        my_str = "Account:\n"
+        my_str += " name:{}\n".format(self.name)
+        my_str += " balance:{:,.2f}\n".format(self.balance)
+        for my_t in self.transactions:
+            my_str += "   amount:{} subaccount:{} metadata:{}\n".format(my_t.amount, my_t.subaccount, my_t.metadata)
+        return my_str
