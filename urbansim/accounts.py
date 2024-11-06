@@ -54,7 +54,7 @@ class Account(object):
         self.balance = balance
         self.transactions = []
 
-    def add_transaction(self, amount, subaccount=None, metadata=None):
+    def add_transaction(self, amount, subaccount=None, metadata=None, logger=None):
         """
         Add a new transaction to the account.
 
@@ -70,6 +70,9 @@ class Account(object):
             May not contain keys 'amount' or 'subaccount'.
 
         """
+        if logger: 
+            logger.debug(f"Account.add_transaction() for account with name {self.name} and balance ${self.balance:,}")
+            logger.debug(f"  => transaction amount=${amount:,} subaccount={subaccount} metadata={metadata}")
         metadata = metadata or {}
         self.transactions.append(Transaction(amount, subaccount, metadata))
         self.balance += amount
